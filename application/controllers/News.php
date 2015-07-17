@@ -7,6 +7,9 @@ class News extends CI_Controller {
         {
                 parent::__construct();
                 $this->load->model('news_model');
+            
+                $this->config->set_item('banner', 'News Banner');
+            
         }//end constructor
 
         public function index()
@@ -14,9 +17,9 @@ class News extends CI_Controller {
                 $data['news'] = $this->news_model->get_news();
                 $data['title'] = 'News archive';
 
-                $this->load->view('templates/header', $data);
+                //$this->load->view('templates/header', $data);
                 $this->load->view('news/index', $data);
-                $this->load->view('templates/footer');
+                //$this->load->view('templates/footer');
         }//end index
 
         public function view($slug = NULL)
