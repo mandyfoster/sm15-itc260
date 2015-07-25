@@ -57,8 +57,12 @@ $route['news/create'] = 'news/create';
 $route['news/(:any)'] = 'news/view/$1';
 $route['news'] = 'news';
 
+//routes for add controller
+$route['customer'] = 'customer';
+
 //routes for RSS controller
 $route['rss'] = 'rss';
+$route['rss/(:any)'] = 'rss/view/$1';
 
 //routes for static pages
 $route['(:any)'] = 'pages/view/$1';

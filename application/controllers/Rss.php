@@ -2,43 +2,41 @@
 //Rss.php
 
 class Rss extends CI_Controller {
+    
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('rss_model');
 
-        public function index()
+        $this->config->set_item('banner', 'Rss News Feed');
+
+    }//end constructor
+
+
+
+    public function index()
+    {                  
+        $this->load->view('rss/index');
+    }//end index
+
+
+    public function view( $slug )
+    {
+        $data['rssFeeds'] = $this->rss_model->get_rss($slug);
+
+        if (empty($data['rssFeeds']))
         {
-            
-                //$request = "http://rss.news.yahoo.com/rss/software";
-            //$request = "https://news.google.com/news?pz=1&cf=all&ned=us&hl=en&q=music&output=rss";
-            
-            
-            
-           /*
-           https://www.google.com/search?hl=en&gl=us&tbm=nws&authuser=0&q=arabian+stalliion&oq=arabian+stalliion&gs_l=news-cc.12..43j43i53.5952.8694.0.10664.17.9.0.8.1.0.46.308.9.9.0...0.0...1ac.1.rZYl1AUMGjI#hl=en&gl=us&authuser=0&tbm=nws&q=arabian+stalliion
-           */
-            
-            
-            
-            
-            $request = "https://news.google.com/news?pz=1&cf=all&ned=us&hl=en&q=arabian+stallion&output=rss";
-            
-            
-            
-            
-            
-              $response = file_get_contents($request);
-              $xml = simplexml_load_string($response);
-              print '<h1>' . $xml->channel->title . '</h1>';
-              foreach($xml->channel->item as $story)
-              {
-                echo '<a href="' . $story->link . '">' . $story->title . '</a><br />'; 
-                echo '<p>' . $story->description . '</p><br /><br />';
-              }
-            
-                #$data['news'] = $this->news_model->get_news();
-                #$data['title'] = 'News archive';
+            show_404();
+        }
 
-                #$this->load->view('templates/header', $data);
-                #$this->load->view('news/index', $data);
-                #$this->load->view('templates/footer');
-        }//end index
+        //$rss['title'] = $data['news_item']['title'];
+        $data['title'] = $data['rssFeeds']['title'];
+
+
+        $this->load->view('rss/view');
+
+    }//end view
+
+
 
 }// end Rss

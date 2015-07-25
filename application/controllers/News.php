@@ -33,9 +33,11 @@ class News extends CI_Controller {
 
                 $data['title'] = $data['news_item']['title'];
 
-                $this->load->view('templates/header', $data);
+                //$this->load->view('templates/header', $data);
+           // $this->load->view( $this->config->item('theme') . 'header');
                 $this->load->view('news/view', $data);
-                $this->load->view('templates/footer');
+                //$this->load->view('templates/footer');
+           // $this->load->view( $this->config->item('theme') . 'footer');
         }//end view
     
     
@@ -52,9 +54,11 @@ class News extends CI_Controller {
 
         if ($this->form_validation->run() === FALSE)
         {//data not submitted
-            $this->load->view('templates/header', $data);
+            //$this->load->view('templates/header', $data);
+            //$this->load->view( $this->config->item('theme') . 'header');
             $this->load->view('news/create', $data);
-            $this->load->view('templates/footer', $data);
+            //$this->load->view('templates/footer', $data);
+            //$this->load->view( $this->config->item('theme') . 'footer');
 
         }
         else
@@ -67,9 +71,11 @@ class News extends CI_Controller {
             }
             
             $data['success'] = $success;
-            $this->load->view('templates/header', $data);
+            //$this->load->view('templates/header', $data);
+            $this->load->view( $this->config->item('theme') . 'header');
             $this->load->view('news/feedback', $data);
-            $this->load->view('templates/footer', $data);
+            //$this->load->view('templates/footer', $data);
+            $this->load->view( $this->config->item('theme') . 'footer');
         }
     }
     
